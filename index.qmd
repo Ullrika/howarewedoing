@@ -1,0 +1,149 @@
+---
+title: "howarewedoing"
+format: 
+  html:
+    echo: false
+    message: false
+    warning: false
+    embed-resources: true
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(googlesheets4)
+library(googledrive)
+
+```
+
+```{r}
+googledrive::drive_auth()
+```
+
+```{r}
+url = "https://docs.google.com/spreadsheets/d/1YuvpNBbFynfGL5fEkhlhCODLjMnKO-Miwd_1iATMTz4/edit?resourcekey#gid=166329298"
+df <- read_sheet(url)
+```
+
+```{r}
+#df <- read.csv("svar.csv")
+```
+
+```{r}
+df$day <- substr(df$Tidstämpel,1,10)
+days <- unique(df$day)
+
+df2 <- do.call('rbind',lapply(1:length(days),function(i){
+  df_sel <- df[df$day == days[i],]
+  n = nrow(df_sel)
+  data.frame(values = c(df_sel[,2]$`Jag har lärt mig något nytt`, df_sel[,3]$`Jag har fått en ny idé`, 
+    df_sel[,4]$`Jag har omprövat något`, df_sel[,5]$`Jag har upplevt konstruktiv friktion`, 
+    df_sel[,6]$`Jag längtar till nästa fredag`), 
+  day = days[i], 
+  dimension = c(rep("lärt mig något nytt",n),rep("fått en ny idé",n),rep("omprövat något",n),rep("upplevt konstruktiv friktion",n),rep("längtar till nästa fredag",n)))
+ 
+  #data.frame(values = c(df_sel[,2], df_sel[,3], 
+  #  df_sel[,4], df_sel[,5], 
+  #  df_sel[,6]), 
+  #day = days[i], 
+  #dimension = c(rep("lärt mig något nytt",n),rep("fått en ny idé",n),rep("omprövat något",n),rep("upplevt konstruktiv friktion",n),rep("längtar till nästa fredag",n)))
+  }
+  ))
+
+
+```
+
+```{r}
+plot_df <- df2 %>%
+  group_by(dimension,day) %>%
+  summarise(
+    min_value = min(values),
+    mean_value = mean(values),
+    n = n() 
+  ) %>%
+  mutate(medel = round(mean_value, digits = 0))
+```
+
+```{r}
+ggplot(plot_df) +
+  # Make custom panel grid
+  geom_hline(
+    aes(yintercept = y), 
+    data.frame(y = c(0:5))#,
+    #color = "lightgrey"
+  ) + 
+  # Add bars to represent the cumulative track lengths
+  # str_wrap(region, 5) wraps the text so each line has at most 5 characters
+  # (but it doesn't break long words!)
+  geom_col(
+    aes(
+      x = reorder(str_wrap(dimension, 2), mean_value),
+      y = mean_value,
+      fill = dimension
+    ),
+    position = "dodge2",
+    show.legend = TRUE,
+    alpha = .9
+  ) + 
+  facet_wrap(vars(day)) +
+  xlab("") +
+  ylab("medel") +
+  theme(legend.position = "none") +
+  # Make it circular!
+  coord_polar() 
+```
+
+```{r}
+#| eval: false
++
+  
+  # Add dots to represent the mean gain
+  geom_point(
+    aes(
+      x = reorder(str_wrap(region, 5),sum_length),
+      y = mean_gain
+    ),
+    size = 3,
+    color = "gray12"
+  ) +
+  
+  # Lollipop shaft for mean gain per region
+  geom_segment(
+    aes(
+      x = reorder(str_wrap(region, 5), sum_length),
+      y = 0,
+      xend = reorder(str_wrap(region, 5), sum_length),
+      yend = 3000
+    ),
+    linetype = "dashed",
+    color = "gray12"
+  ) + 
+  
+  # Make it circular!
+  coord_polar()
+
+plt
+```
+
+```{r}
+#| message: false
+#| eval: false
+
+df2 %>%
+  group_by(day) %>%
+  summarise(
+    mean_value = mean(values),
+    n = n()
+  ) %>%
+  mutate(medel = round(mean_value, digits = 0)) %>%
+  ggplot(aes(x=day, y=mean_value)) +
+  geom_point()
+```
+
+```{r}
+df2 %>% 
+  ggplot(aes(x = day, y = values, fill= day)) +
+  geom_violin()
+```
