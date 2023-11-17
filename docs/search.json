@@ -5,47 +5,5 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "dataevidens.html#data-källor-inom-egen-forskning",
-    "href": "dataevidens.html#data-källor-inom-egen-forskning",
-    "title": "data & evidens",
-    "section": "“Data”-källor inom egen forskning",
-    "text": "“Data”-källor inom egen forskning\n\nData = Input till forskning\nPrinciper och metoder i vetenskapliga bedömningar och beslutsfattande\nEmpiriska data som underlag eller vidare analys för att sammanfatta något som behövs för bedömningar\nExperters osäkerhet\nBeteende och psykologiska och kognitiva faktorer"
-  },
-  {
-    "objectID": "dataevidens.html#principer-och-metoder-i-vetenskapliga-bedömningar",
-    "href": "dataevidens.html#principer-och-metoder-i-vetenskapliga-bedömningar",
-    "title": "data & evidens",
-    "section": "Principer och metoder i vetenskapliga bedömningar",
-    "text": "Principer och metoder i vetenskapliga bedömningar\n\nHur har bedömningar gjorts\nVad finns det för krav på bedömningar Exempel osäkerhet\nPrinciper och metoder ska passa in i ett beslutsfattande\n\nExempel på bedömningsflow"
-  },
-  {
-    "objectID": "dataevidens.html#empiriska-data",
-    "href": "dataevidens.html#empiriska-data",
-    "title": "data & evidens",
-    "section": "Empiriska data",
-    "text": "Empiriska data\n\nData som går in i analyser som ingår i bedömningar\nStatistiska metoder som kombinerar flera datakällor\nStatistiska metoder att ta hänsyn till fel och andra brister i data\nBayesiansk princip för inferens\n\n\\(P(A|data) = \\frac{P(data|A)P(A)}{P(data)}\\)\n\ndata kan bytas ut mot evidens\n\n\\(P(A|E) = \\frac{P(E|A)P(A)}{P(E)}\\)"
-  },
-  {
-    "objectID": "dataevidens.html#experters-osäkerhet-1",
-    "href": "dataevidens.html#experters-osäkerhet-1",
-    "title": "data & evidens",
-    "section": "Experters osäkerhet (1)",
-    "text": "Experters osäkerhet (1)\n\nVälja experter\nFormulera vad de ska vara osäkra på\n\nOsäkerhet i slutsats\nexperter vara överrens\nidentifiera källor till osäkerhet\n\n\nexempel osäkerhetsanalys"
-  },
-  {
-    "objectID": "dataevidens.html#experters-osäkerhet-2",
-    "href": "dataevidens.html#experters-osäkerhet-2",
-    "title": "data & evidens",
-    "section": "Experters osäkerhet (2)",
-    "text": "Experters osäkerhet (2)\n\nBe experter uttrycka osäkerhet\nindividuellt\ndiskutera\nenas om en beskrivning av gruppens osäkerhet exempel BPA\növersätt till sannolikhet exempel SHELF"
-  },
-  {
-    "objectID": "dataevidens.html#beteende-och-psykologiska-och-kognitiva-faktorer",
-    "href": "dataevidens.html#beteende-och-psykologiska-och-kognitiva-faktorer",
-    "title": "data & evidens",
-    "section": "Beteende och psykologiska och kognitiva faktorer",
-    "text": "Beteende och psykologiska och kognitiva faktorer\n\nUndersökningar av beteende - intervjuer och frågeundersökning\nHur man ser på beskrivning av osäkerhet\n\nDavid Spiegelhalter\nJoseph Kadane"
   }
 ]
