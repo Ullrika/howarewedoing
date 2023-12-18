@@ -97,7 +97,7 @@ ggplot(plot_df) +
 
 ```{r}
 #| eval: false
-+
+
   
   # Add dots to represent the mean gain
   geom_point(
@@ -119,7 +119,7 @@ ggplot(plot_df) +
     ),
     linetype = "dashed",
     color = "gray12"
-  ) + 
+  ) +
   
   # Make it circular!
   coord_polar()
