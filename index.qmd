@@ -55,6 +55,8 @@ df2 <- do.call('rbind',lapply(1:length(days),function(i){
 
 ```
 
+
+
 ```{r}
 plot_df <- df2 %>%
   group_by(dimension,day) %>%
@@ -67,6 +69,12 @@ plot_df <- df2 %>%
 ```
 
 ```{r}
+plot_df$d = substr(plot_df$dimension,1,4)
+
+```
+
+
+```{r}
 ggplot(plot_df) +
   # Make custom panel grid
   geom_hline(
@@ -76,21 +84,21 @@ ggplot(plot_df) +
   ) + 
   # Add bars to represent the cumulative track lengths
   # str_wrap(region, 5) wraps the text so each line has at most 5 characters
-  # (but it doesn't break long words!)
-  geom_col(
+  # (but it doesn't break long words!
+ geom_col(
     aes(
-      x = reorder(str_wrap(dimension, 2), mean_value),
+      x = reorder(str_wrap(d, 2), mean_value),
       y = mean_value,
-      fill = dimension
+      fill = d
     ),
     position = "dodge2",
-    show.legend = TRUE,
+    show.legend = FALSE,
     alpha = .9
   ) + 
   facet_wrap(vars(day)) +
   xlab("") +
   ylab("medel") +
-  theme(legend.position = "none") +
+  #theme(legend.position = "bottom") +
   # Make it circular!
   coord_polar() 
 ```
@@ -127,9 +135,17 @@ ggplot(plot_df) +
 plt
 ```
 
+
+
+```{r}
+df2 %>% 
+  ggplot(aes(x = day, y = values, fill= day)) +
+  geom_violin()
+```
+
+
 ```{r}
 #| message: false
-#| eval: false
 
 df2 %>%
   group_by(day) %>%
@@ -138,12 +154,22 @@ df2 %>%
     n = n()
   ) %>%
   mutate(medel = round(mean_value, digits = 0)) %>%
-  ggplot(aes(x=day, y=mean_value)) +
-  geom_point()
+  ggplot(aes(x=order(day), y=mean_value)) +
+  geom_point() +
+  geom_smooth(method="loess") +
+  xlab("time") +
+  ylab("average of index for satisfaction") +
+  ylim(1,5.5)
 ```
 
+
 ```{r}
-df2 %>% 
-  ggplot(aes(x = day, y = values, fill= day)) +
-  geom_violin()
+#| message: false
+
+df2  %>%
+  ggplot(aes(x=order(day), y=values)) +
+  geom_point() +
+  geom_smooth(method="loess") +
+  xlab("time") +
+  ylab("index for satisfaction") 
 ```
