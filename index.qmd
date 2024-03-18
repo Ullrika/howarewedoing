@@ -28,6 +28,7 @@ df <- read_sheet(url)
 ```
 
 ```{r}
+#write.csv(df,file='svar1.csv')
 #df <- read.csv("svar.csv")
 ```
 
@@ -55,8 +56,6 @@ df2 <- do.call('rbind',lapply(1:length(days),function(i){
 
 ```
 
-
-
 ```{r}
 plot_df <- df2 %>%
   group_by(dimension,day) %>%
@@ -72,7 +71,6 @@ plot_df <- df2 %>%
 plot_df$d = substr(plot_df$dimension,1,4)
 
 ```
-
 
 ```{r}
 ggplot(plot_df) +
@@ -135,14 +133,11 @@ ggplot(plot_df) +
 plt
 ```
 
-
-
 ```{r}
 df2 %>% 
   ggplot(aes(x = day, y = values, fill= day)) +
   geom_violin()
 ```
-
 
 ```{r}
 #| message: false
@@ -161,7 +156,6 @@ df2 %>%
   ylab("average of index for satisfaction") +
   ylim(1,5.5)
 ```
-
 
 ```{r}
 #| message: false
