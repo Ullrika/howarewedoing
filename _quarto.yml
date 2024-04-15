@@ -8,7 +8,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - rank.qmd
+      - href: rank.qmd
+        text: test
 
 format:
   html:
