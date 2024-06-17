@@ -1,38 +1,21 @@
----
-title: "rank"
-format: html
-server: shiny
----
-
-```{r}
+## Example shiny app with rank list
 library(dplyr)
 library(shiny)
 library(sortable)
-```
 
-```{r}
+#https://posit.co/blog/automated-survey-reporting/
+#https://nirzaree.wordpress.com/2020/10/11/building-a-webapp-for-data-collection-visualization-using-r-shiny/
+
 labels <- list(
-  "fiske/fishing",
-  #"marint liv/marine life",
-  "boende/living",
-  "rekreation/recreation",
-  "biologisk mångfald/biodiversity",
-  "handel/trade",
-  "transporter/transports",
-  "försvar/defence",
-  "kulturminnen/cultural heritage",
-  "öppen horisont/open horison",
-  "energiproduktion/energy production",
-  "ljus/light",
-  #"identitet/identity",#identifiering
-  "lukt och doft/smell and scent",
-  "ljud/sound"#,
-  #htmltools::tags$div(
-  #  htmltools::em("Complex"), " html tag without a name"
-  #),
-  #"five" = htmltools::tags$div(
-  #  htmltools::em("Complex"), " html tag with name: 'five'"
-  #)
+  "one",
+  "two",
+  "three",
+  htmltools::tags$div(
+    htmltools::em("Complex"), " html tag without a name"
+  ),
+  "five" = htmltools::tags$div(
+    htmltools::em("Complex"), " html tag with name: 'five'"
+  )
 )
 
 rank_list_basic <- rank_list(
@@ -54,15 +37,14 @@ rank_list_multi <- rank_list(
   input_id = "rank_list_multi",
   options = sortable_options(multiDrag = TRUE)
 )
-```
 
 
-```{r}
+
 ui <- fluidPage(
   fluidRow(
     column(
       width = 12,
-      tags$h2("Default"),
+      tags$h2("Default, multi-drag and swapping behaviour"),
       tabsetPanel(
         type = "tabs",
         tabPanel(
@@ -72,16 +54,26 @@ ui <- fluidPage(
           rank_list_basic,
           tags$b("Result"),
           verbatimTextOutput("results_basic")
-        
+        ),
+        tabPanel(
+          "Multi-drag",
+          tags$b("Exercise"),
+          rank_list_multi,
+          tags$b("Result"),
+          verbatimTextOutput("results_multi")
+        ),
+        tabPanel(
+          "Swap",
+          tags$b("Exercise"),
+          rank_list_swap,
+          tags$b("Result"),
+          verbatimTextOutput("results_swap")
         )
       )
     )
   )
 )
-```
 
-
-```{r}
 server <- function(input, output, session) {
   output$results_basic <- renderPrint({
     input$rank_list_basic # This matches the input_id of the rank list
@@ -102,10 +94,5 @@ server <- function(input, output, session) {
   }) %>%
     bindEvent(input$btnUpdate)
 }
-```
 
-
-```{r}
 shinyApp(ui, server)
-```
-

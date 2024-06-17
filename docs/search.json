@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "rank.html",
+    "href": "rank.html",
+    "title": "rank",
+    "section": "",
+    "text": "Attaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\n\n\nPhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.\n\n\nShiny applications not supported in static R Markdown documents"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
